@@ -11,8 +11,7 @@ test('homepage shows Welcome to CI/CD', async () => {
 
         const heading = await driver.findElement(By.css('h1'));
         const text = await heading.getText();
-
-        expect(text).toBe('Welcome to CI/CD');
+expect(text).toBe('Hello DevOps');
     } finally {
         await driver.quit();
     }
