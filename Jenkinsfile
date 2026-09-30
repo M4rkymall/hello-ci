@@ -1,9 +1,14 @@
 pipeline {
     agent any
 
-environment {
-    SELENIUM_URL = 'http://selenium:4444/wd/hub'
-}
+    triggers {
+        pollSCM('H/2 * * * *')
+    }
+
+    environment {
+        SELENIUM_URL = 'http://selenium:4444/wd/hub'
+    }
+
     tools {
         nodejs 'node20'
     }
@@ -21,18 +26,23 @@ environment {
             }
         }
 
-stage('Start App') {
-    steps {
-        sh 'node src/app.js &'
-        sleep 5
-    }
-}
-
+        stage('Start App') {
+            steps {
+                sh 'node src/app.js &'
+                sleep 5
+            }
+        }
 
         stage('E2E') {
             steps {
                 sh 'npm run test:e2e'
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'test-results/*.xml'
         }
     }
 }

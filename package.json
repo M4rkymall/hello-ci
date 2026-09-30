@@ -1,23 +1,16 @@
 {
   "name": "hello-ci",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-"test": "jest tests/math.test.js",
-  "test:e2e": "jest tests/e2e"
-}
-  ,
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+    "test": "jest tests/math.test.js --reporters=default --reporters=jest-junit",
+    "test:e2e": "jest tests/e2e --reporters=default --reporters=jest-junit"
+  },
+  "jest-junit": {
+    "outputDirectory": "test-results",
+    "outputName": "junit.xml"
+  },
   "devDependencies": {
     "jest": "^30.5.2",
-    "jest-junit": "^17.0.0",
-    "selenium-webdriver": "^4.49.0"
-  },
-  "dependencies": {
-    "express": "^5.2.1"
+    "jest-junit": "^17.0.0"
   }
 }
